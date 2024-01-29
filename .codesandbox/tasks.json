@@ -12,6 +12,10 @@
     {
       "name": "yarn build",
       "command": "yarn build"
+    },
+    {
+      "name" : "symbolik link"
+      "command" : ln -s . public/build/build
     }
   ],
 

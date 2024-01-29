@@ -66,7 +66,7 @@ class EventsListener
         $response->headers->set('Expires', "0");
         if ($this->application->isServerLocal()) {
             // local server (no proxy), add some header for simulate the proxy
-            $response->headers->set('X-Frame-Options', "SAMEORIGIN");
+         //   $response->headers->set('X-Frame-Options', "SAMEORIGIN");
         }
         $response->headers->set('Referrer-Policy', "strict-origin");
         $response->headers->set('X-Content-Type-Options', "nosniff");
