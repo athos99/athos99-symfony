@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+  <h1>Hello {{ app.user.fullName }}</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <h3>Informations</h3>
+      <table class="table table-sm table-striped">
+        <tbody>
+        <tr>
+          <td>Loginame</td>
+          <td>{{ app.user.getUserIdentifier() }}</td>
+        </tr>
+        <tr>
+          <td>Version</td>
+          <td>{{ version() }}</td>
+        </tr>
+        <tr>
+          <td>Rôles Gina</td>
+          <td>{{ app.user.roles|sort|join(', ') }}</td>
+        </tr>
+        <tr>
+          <td>Rôles après héritage</td>
+          <td>{{ rolesHeritage|sort|join(', ') }}</td>
+        </tr>
+        {% if ginaAttribut %}
+          <tr>
+            <td>Attribut Gina</td>
+            <td>
+              {% for key,attribut in app.user.attributes %}
+                {{ key }} : {{ attribut|join(',') }}<br>
+              {% endfor %}
+            </td>
+          </tr>
+        {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

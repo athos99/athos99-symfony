@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paramètres de l'application{% endblock %}
+
+{% block main %}
+  <h1>Paramètres de l'application</h1>
+
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Value</th>
+      <th scope="col">Default Value</th>
+      <th scope="col">{{ modif ? 'Actions' : ''}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {# Boucle sur les clés et les valeurs du tableau 'defaultValues' #}
+    {% for key, value in defaultValues %}
+      <tr>
+        {# Affiche la clé #}
+        <td>{{ key }}
+          {% if annotations[key].description|length %}<br><span
+            class="fw-lighter fst-italic">{{ annotations[key].description }}</span>
+          {% endif %}
+        </td>
+        {# Si la clé est présente dans le tableau des valeurs actuelles,
+            Afficher la valeur qui correspont a la clé. (Clé = Nom du paramètre) #}
+        {% if key in currentValues|keys %}
+          {# Affiche la valeur actuelle du paramètre et réduit la taille maximale d'affichage à 25 caractères #}
+          <td>{{ currentValues[key]|u.truncate(80, '...') }}</td>
+          {# Affiche la valeur par défaut #}
+          <td>{{ value|u.truncate(80, '...') }}</td>
+          {# Redirige vers la page de modification #}
+          <td>
+            {% if modif and not annotations[key].readOnly %}
+            <a class="btn btn-primary"
+               id="edit_{{ key }}" href="{{ path('admin_parameter_edit', {'name': key }) }}">Edit</a>
+            {% endif %}
+          </td>
+          {# Sinon, affiche un icone avec un titre indiquant que la valeur n'a pas été modifiée #}
+        {% else %}
+          <td class="bi bi-x-octagon"
+              title="La valeur n'a pas été modifiée"></td>
+          {# Affiche la valeur par défaut #}
+          <td>{{ value|u.truncate(80, '...') }}</td>
+          {# Redirige vers la page de modification #}
+          <td>
+            {% if modif and not annotations[key].readOnly %}
+              <a class="btn btn-warning"
+                 id="edit_{{ key }}" href="{{ path('admin_parameter_edit', {'name': key }) }}">Edit</a>
+            {% endif %}
+          </td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

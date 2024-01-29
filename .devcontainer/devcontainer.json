@@ -1,0 +1,8 @@
+{
+    "name": "Dev Container tutorial",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+    "features": {
+        "ghcr.io/devcontainers/features/php:1": {},
+        "ghcr.io/shyim/devcontainers-features/symfony-cli:0": {}
+    }
+}

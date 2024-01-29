@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition du paramètre{% endblock %}
+
+{% block main %}
+  <h1>Edition du paramètre</h1>
+  <br>
+
+  {{ form_start(form) }}
+  <div class="mb-3 row">
+    <label class="col-form-label col-sm-2">Description : </label>
+    <div class="col-sm-10 fw-lighter fst-italic">
+      {{ annotation.description }}
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-form-label col-sm-2">Valeur : </label>
+    <div class="col-sm-10 fw-lighter fst-italic">
+      {{ annotation.valeur }}
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-form-label col-sm-2">Name : </label>
+    <div class="col-sm-8">
+      {{ form_widget(form.name) }}
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-form-label col-sm-2">Value : </label>
+    <div class="col-sm-8">
+      {{ form_errors(form.value) }}
+      {{ form_widget(form.value) }}
+    </div>
+    <div class="col-2">
+      <button type="submit" value="update" name="action" class="btn btn-primary" style="width:100%">Update</button>
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label class="col-form-label col-sm-2">Default value : </label>
+    <div class="col-sm-8">
+      <textarea class="form-control" rows="6" readonly>{{ defaultValue }}</textarea>
+    </div>
+    <div class="col-2">
+      {% if currentValueState %}
+        <button type="submit" value="delete" name="action" style="width:100%" class="btn btn-warning">Back to default
+          value
+        </button>
+      {% else %}
+        <button type="submit" value="delete" name="action" style="width:100%" class="btn btn-warning" disabled>Back to
+          default value
+        </button>
+      {% endif %}
+    </div>
+  </div>
+  <div class="mb-3 row d-flex justify-content-end">
+    <div class="d-grid col-2">
+      <a class="btn btn-secondary" href="{{ path('admin_parameter') }}">Back to list</a>
+    </div>
+  </div>
+  {{ form_end(form) }}
+
+  {# {{ include('parameter_crud/_delete_form.html.twig') }} #}
+{% endblock %}

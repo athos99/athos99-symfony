@@ -1,0 +1,29 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "composer install",
+      "command": "composer install"
+    },
+    {
+      "name": "yarn install",
+      "command": "yarn install"
+    },
+    {
+      "name": "yarn build",
+      "command": "yarn build"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "start": {
+      "name": "start",
+      "command": "php -S localhost:8080 -t public",
+      "runAtStart": true,
+      "preview": {
+        "port": 8080
+      }
+    }
+  }
+}
